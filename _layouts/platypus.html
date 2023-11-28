@@ -29,7 +29,7 @@
     }
     /* Styles for Binary Number Guesser */
     body {
-      font-family: Arial, serif;
+      font-family: Arial, sans-serif;
       text-align: center;
       background-repeat: no-repeat;
       background-image: url('https://fiu-original.b-cdn.net/fontsinuse.com/use-images/122/122013/122013.png?filename=Captura%20de%20VLC_2020-09-26-20h46m09s582.png');
@@ -52,6 +52,24 @@
     }
     #perry {
       background-image: url('https://static.wikia.nocookie.net/vsbattles/images/6/64/Perry_the_platypus_by_sarrel-d3gvo02.png/revision/latest/scale-to-width-down/1200?cb=20160528190454');
+      animation: kickAnimation 2s ease infinite;
+    }
+    @keyframes kickAnimation {
+      0% {
+        transform: translateX(-50%) rotate(0deg);
+      }
+      10% {
+        transform: translateX(-75%) rotate(180deg);
+      }
+      30% {
+        transform: translateX(-100%) translateY(-100%) rotate(360deg);
+      }
+      50% {
+        transform: translateX(-25%) translateY(50%);
+      }
+      100% {
+        transform: translateX(0) rotate(0deg);
+      }
     }
     .speech-bubble {
       position: absolute;
@@ -107,14 +125,14 @@
     }
     .health-bar {
       width: 100%;
-      background-color: #e3e3e3;
+      background-color: #12c012;
       border-radius: 5px;
       overflow: hidden;
       margin-top: 10px;
     }
     .health-fill {
       height: 20px;
-      background-color: rgb(255, 0, 0);
+      background-color: rgb(196, 25, 25);
       transition: width 0.3s ease;
     }
   </style>
@@ -147,7 +165,7 @@
       <button onclick="resetGame()">Try Again</button>
       <p id="result"></p>
       <p>Attempts Left: <span id="attemptsLeft">30</span></p>
-      <p class="hint" id="hintText">Hint: The number is between 0 and 1023 in binary.</p>
+      <p class="hint" id="hintText">Hint: The number is between 0 and 256 in binary.</p>
       <div class="character" id="doofenshmirtz">
         <div class="speech-bubble" id="doofSpeech">Placeholder Text</div>
       </div>
@@ -208,7 +226,7 @@
     let attempts = 30;
     let currentRandomNumber = Math.floor(Math.random() * 256).toString(2);
     const doofPhrases = [
-      "Ouch! Perry, why?",
+    "Ouch! Perry, why?",
       "This wasn't in my -inator's plans!",
       "Curse you, Perry the Platypus!",
       "I knew this wouldn't end well!",
@@ -226,8 +244,8 @@
     function updateHealthBars() {
       const doofHealth = (attempts / 30) * 100;
       const perryHealth = (score / 100) * 100;
-      document.getElementById('perryHealthBar').style.width = doofHealth + '%';
-      document.getElementById('doofHealthBar').style.width = perryHealth + '%';
+      document.getElementById('doofHealthBar').style.width = doofHealth + '%';
+      document.getElementById('perryHealthBar').style.width = perryHealth + '%';
     }
     function checkGuess() {
       const userGuess = document.getElementById('userGuess').value.trim();
